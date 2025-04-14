@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <title>富足人生俱乐部|情绪消费日记</title>
+    <style>
+        /* 可添加一些自定义样式 */
+        .rich-club {
+            color: #FFA500; /* 橙色，可根据需要调整 */
+        }
+        .emotional-diary {
+            color: #ffffff; /* 白色 */
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 font-sans">
+    <!-- 导航栏 -->
+    <nav class="bg-blue-500 p-4 text-white">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-2xl font-bold">
+                <span class="rich-club">富足人生俱乐部</span>
+                <span class="emotional-diary">|情绪消费日记</span>
+            </h1>
+            <ul class="flex space-x-4">
+                <li><a href="#" class="hover:underline">记录</a></li>
+                <li><a href="#" class="hover:underline">统计</a></li>
+                <li><a href="#" class="hover:underline">决策辅助</a></li>
+                <li><a href="#" id="historyButton" class="hover:underline">历史记录</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 主内容区 -->
+    <div class="container mx-auto p-4">
+        <!-- 记录消费 -->
+        <div id="record" class="mb-8">
+            <h2 class="text-xl font-bold mb-2">记录消费</h2>
+            <form id="recordForm" class="space-y-4">
+                <div>
+                    <label for="date" class="block text-sm font-medium text-gray-700">日期</label>
+                    <input type="date" id="date" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+                <div>
+                    <label for="amount" class="block text-sm font-medium text-gray-700">金额</label>
+                    <input type="number" id="amount" step="0.01" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+                <div>
+                    <label for="emotion" class="block text-sm font-medium text-gray-700">消费时情绪</label>
+                    <select id="emotion" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                        <option value="">选择情绪</option>
+                        <option value="兴奋">兴奋</option>
+                        <option value="焦虑">焦虑</option>
+                        <option value="压力">压力</option>
+                        <option value="孤独">孤独</option>
+                        <option value="愉悦">愉悦</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="trigger" class="block text-sm font-medium text-gray-700">触发点</label>
+                    <select id="trigger" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                        <option value="">选择触发点</option>
+                        <option value="广告推送">广告推送</option>
+                        <option value="社交比较">社交比较</option>
+                        <option value="场景暗示">场景暗示</option>
+                        <option value="情绪宣泄">情绪宣泄</option>
+                    </select>
+                </div>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">保存记录</button>
+            </form>
+        </div>
+
+        <!-- 统计图表 -->
+        <div id="statistics" class="mb-8">
+            <h2 class="text-xl font-bold mb-2">周/月统计图表（按情绪）</h2>
+            <div class="flex space-x-4 mb-4">
+                <button id="weeklyChart" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md">周统计</button>
+                <button id="monthlyChart" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md">月统计</button>
+            </div>
+            <canvas id="chart" width="400" height="200"></canvas>
+        </div>
+
+        <!-- 决策辅助 -->
+        <div id="decision" class="mb-8">
+            <h2 class="text-xl font-bold mb-2">决策辅助</h2>
+            <p>基于认知行为疗法（CBT）和延迟满足实验，在你想要消费前，先等待一段时间，思考消费的必要性。</p>
+            <button id="waitButton" class="bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-md">等待10分钟再决定</button>
+        </div>
+
+        <!-- 历史记录 -->
+        <div id="history" class="mb-8 hidden">
+            <h2 class="text-xl font-bold mb-2">历史记录</h2>
+            <div class="flex space-x-4 mb-4">
+                <input type="date" id="filterDate" class="border border-gray-300 rounded-md px-2 py-1" placeholder="按日期筛选">
+                <select id="filterEmotion" class="border border-gray-300 rounded-md px-2 py-1">
+                    <option value="">全部情绪</option>
+                    <option value="兴奋">兴奋</option>
+                    <option value="焦虑">焦虑</option>
+                    <option value="压力">压力</option>
+                    <option value="孤独">孤独</option>
+                    <option value="愉悦">愉悦</option>
+                </select>
+                <select id="filterTrigger" class="border border-gray-300 rounded-md px-2 py-1">
+                    <option value="">全部触发点</option>
+                    <option value="广告推送">广告推送</option>
+                    <option value="社交比较">社交比较</option>
+                    <option value="场景暗示">场景暗示</option>
+                    <option value="情绪宣泄">情绪宣泄</option>
+                </select>
+                <button id="filterButton" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">筛选</button>
+                <button id="clearFilterButton" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-md">清除筛选</button>
+            </div>
+            <table id="historyTable" class="min-w-full divide-y divide-gray-200">
+                <thead class="bg-gray-50">
+                    <tr>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">日期</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">金额</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">情绪</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">触发点</th>
+                    </tr>
+                </thead>
+                <tbody id="historyTableBody" class="bg-white divide-y divide-gray-200"></tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="bg-gray-200 p-4 text-center text-gray-600">
+        © 2025 尚新峰版权所有
+    </footer>
+
+    <!-- 声明 -->
+    <div class="bg-gray-200 p-4 text-center text-gray-600 text-sm">
+        本测试为心理成长工具，非专业心理和投资咨询服务，结果仅供自我认知参考。
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // 模拟消费记录数据
+        const records = [];
+        let currentChart;
+
+        // 保存记录
+        const recordForm = document.getElementById('recordForm');
+        recordForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const date = document.getElementById('date').value;
+            const amount = parseFloat(document.getElementById('amount').value);
+            const emotion = document.getElementById('emotion').value;
+            const trigger = document.getElementById('trigger').value;
+
+            records.push({ date, amount, emotion, trigger });
+            console.log('记录已保存:', records);
+            // 清空表单
+            recordForm.reset();
+            // 更新统计图表
+            updateChart('weekly');
+            // 更新历史记录
+            updateHistoryTable();
+        });
+
+        // 更新统计图表
+        function updateChart(type) {
+            if (currentChart) {
+                currentChart.destroy();
+            }
+            const ctx = document.getElementById('chart').getContext('2d');
+            let groupedData;
+            if (type === 'weekly') {
+                groupedData = groupByWeekAndEmotion(records);
+            } else {
+                groupedData = groupByMonthAndEmotion(records);
+            }
+            const labels = Object.keys(groupedData);
+            const amounts = Object.values(groupedData);
+
+            currentChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: `消费金额（${type === 'weekly' ? '周' : '月'}统计）`,
+                        data: amounts,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 205, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 205, 86)',
+                            'rgb(75, 192, 192)',
+                            'rgb(153, 102, 255)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `${context.label}: ${context.parsed.toFixed(2)} 元`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 按周和情绪分组数据
+        function groupByWeekAndEmotion(data) {
+            const grouped = {};
+            data.forEach(record => {
+                const date = new Date(record.date);
+                const week = getWeekNumber(date);
+                const key = `第 ${week} 周 - ${record.emotion}`;
+                if (!grouped[key]) {
+                    grouped[key] = 0;
+                }
+                grouped[key] += record.amount;
+            });
+            return grouped;
+        }
+
+        // 按月和情绪分组数据
+        function groupByMonthAndEmotion(data) {
+            const grouped = {};
+            data.forEach(record => {
+                const date = new Date(record.date);
+                const month = date.getMonth() + 1;
+                const key = `${date.getFullYear()} 年 ${month} 月 - ${record.emotion}`;
+                if (!grouped[key]) {
+                    grouped[key] = 0;
+                }
+                grouped[key] += record.amount;
+            });
+            return grouped;
+        }
+
+        // 获取周数
+        function getWeekNumber(date) {
+            const onejan = new Date(date.getFullYear(), 0, 1);
+            const millisecsInDay = 86400000;
+            return Math.ceil((((date - onejan) / millisecsInDay) + onejan.getDay() + 1) / 7);
+        }
+
+        // 切换周/月统计按钮
+        const weeklyChartButton = document.getElementById('weeklyChart');
+        const monthlyChartButton = document.getElementById('monthlyChart');
+        weeklyChartButton.addEventListener('click', function () {
+            updateChart('weekly');
+        });
+        monthlyChartButton.addEventListener('click', function () {
+            updateChart('monthly');
+        });
+
+        // 决策辅助按钮
+        const waitButton = document.getElementById('waitButton');
+        waitButton.addEventListener('click', function () {
+            alert('请等待10分钟再决定是否消费，思考消费的必要性。');
+        });
+
+        // 历史记录按钮
+        const historyButton = document.getElementById('historyButton');
+        const historyDiv = document.getElementById('history');
+        historyButton.addEventListener('click', function () {
+            historyDiv.classList.toggle('hidden');
+        });
+
+        // 更新历史记录表格
+        function updateHistoryTable(filteredRecords = records) {
+            const historyTableBody = document.getElementById('historyTableBody');
+            historyTableBody.innerHTML = '';
+            filteredRecords.forEach((record) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap">${record.date}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${record.amount}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${record.emotion}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${record.trigger}</td>
+                `;
+                historyTableBody.appendChild(row);
+            });
+        }
+
+        // 筛选功能
+        const filterButton = document.getElementById('filterButton');
+        const clearFilterButton = document.getElementById('clearFilterButton');
+        const filterDate = document.getElementById('filterDate');
+        const filterEmotion = document.getElementById('filterEmotion');
+        const filterTrigger = document.getElementById('filterTrigger');
+
+        filterButton.addEventListener('click', function () {
+            const selectedDate = filterDate.value;
+            const selectedEmotion = filterEmotion.value;
+            const selectedTrigger = filterTrigger.value;
+
+            let filteredRecords = records;
+
+            if (selectedDate) {
+                filteredRecords = filteredRecords.filter(record => record.date === selectedDate);
+            }
+            if (selectedEmotion) {
+                filteredRecords = filteredRecords.filter(record => record.emotion === selectedEmotion);
+            }
+            if (selectedTrigger) {
+                filteredRecords = filteredRecords.filter(record => record.trigger === selectedTrigger);
+            }
+
+            updateHistoryTable(filteredRecords);
+        });
+
+        clearFilterButton.addEventListener('click', function () {
+            filterDate.value = '';
+            filterEmotion.value = '';
+            filterTrigger.value = '';
+            updateHistoryTable();
+        });
+
+        // 初始化图表
+        updateChart('weekly');
+    </script>
+</body>
+
+</html>    
