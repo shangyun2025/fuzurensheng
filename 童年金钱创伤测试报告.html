@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>童年金钱创伤测试 - 财富心理觉醒营</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <div class="container bg-white rounded-2xl shadow-xl max-w-3xl w-full p-8" id="testContainer">
+        <div class="header text-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-800 mb-2">富足人生俱乐部|童年金钱创伤测试</h1>
+            <p class="text-gray-500">通过 12 道题，科学评估原生家庭对您财富心理的影响</p>
+        </div>
+
+        <form id="testForm">
+            <div class="question-item mb-6" data-question="1">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">1. 父母如何谈论金钱？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q1" value="0" required> "钱很难赚，省着花"等负面评价
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q1" value="1"> 回避金钱话题，很少讨论
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q1" value="2"> 理性讨论收支，引导合理消费
+                </label>
+            </div>
+
+            <div class="question-item mb-6" data-question="2">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">2. 童年零花钱管理方式？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q2" value="0" required> 无零花钱，临时申请常被拒绝
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q2" value="1"> 有固定零花钱，但金额极少/需任务兑换
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q2" value="2"> 合理零花钱，引导制定消费计划
+                </label>
+            </div>
+
+            <div class="question-item mb-6" data-question="3">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">3. 想要买玩具时父母反应？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q3" value="0" required> 批评浪费，直接拒绝（即使负担得起）
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q3" value="1"> 以"太贵"为由拒绝，偶尔满足
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q3" value="2"> 询问需求，共同决定是否购买
+                </label>
+            </div>
+
+            <div class="question-item mb-6" data-question="4">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">4. 家庭经济困难时父母表现？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q4" value="0" required> 争吵抱怨，让你感到焦虑不安
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q4" value="1"> 默默承受，家庭氛围压抑但不沟通
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q4" value="2"> 坦诚沟通困难，一起寻找解决办法
+                </label>
+            </div>
+
+            <div class="question-item mb-6" data-question="5">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">5. 父母是否限制兴趣班/活动？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q5" value="0" required> 频繁限制，导致错过重要机会
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q5" value="1"> 偶尔限制，让你感到遗憾
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q5" value="2"> 支持发展兴趣，无经济限制
+                </label>
+            </div>
+
+            <div class="question-item mb-6" data-question="6">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">6. 童年是否因钱感到自卑？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q6" value="0" required> 经常自卑，觉得不如其他孩子
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q6" value="1"> 看到他人拥有时会短暂羡慕
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q6" value="2"> 对物质条件感到满意，无自卑心理
+                </label>
+            </div>
+
+            <div class="question-item mb-6" data-question="7">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">7. 父母是否拿你和他人比较消费习惯？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q7" value="0" required> 经常比较，指责你不会管理钱
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q7" value="1"> 偶尔提及，希望你学习他人优点
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q7" value="2"> 尊重你的习惯，从不进行比较
+                </label>
+            </div>
+
+            <div class="question-item mb-6" data-question="8">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">8. 你通过劳动赚零花钱时父母态度？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q8" value="0" required> 不支持，认为学生不应赚钱
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q8" value="1"> 不反对，但不提供指导
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q8" value="2"> 积极鼓励，教你规划使用零花钱
+                </label>
+            </div>
+
+            <div class="question-item mb-6" data-question="9">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">9. 父母是否谈论过"赚钱辛苦"相关话题？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q9" value="0" required> 反复强调赚钱难，灌输匮乏感
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q9" value="1"> 偶尔提及，但未深入讨论
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q9" value="2"> 客观分析金钱价值，不传递焦虑
+                </label>
+            </div>
+
+            <div class="question-item mb-6" data-question="10">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">10. 家庭是否有明确的金钱规则（如记账、储蓄）？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q10" value="0" required> 无规则，消费随意无规划
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q10" value="1"> 有简单规则，但未严格执行
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q10" value="2"> 制定明确规则，引导你养成理财习惯
+                </label>
+            </div>
+
+            <div class="question-item mb-6" data-question="11">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">11. 父母是否因金钱问题贬低你的需求？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q11" value="0" required> 经常贬低，说"你的需求不重要"
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q11" value="1"> 偶尔忽视，但会满足基本需求
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q11" value="2"> 尊重你的需求，合理评估后回应
+                </label>
+            </div>
+
+            <div class="question-item mb-6" data-question="12">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">12. 成年后是否经常出现无意识超支？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q12" value="0" required> 频繁超支，难以控制消费欲望
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q12" value="1"> 偶尔超支，对消费额度缺乏敏感度
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q12" value="2"> 消费理性，能有效管理预算
+                </label>
+            </div>
+
+            <div class="question-item mb-6">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">姓名</div>
+                <input type="text" id="name" class="block w-full p-4 border border-gray-200 rounded-md" placeholder="请输入您的姓名" required>
+            </div>
+
+            <div class="question-item mb-6">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">电话</div>
+                <div class="flex">
+                    <input type="tel" id="phone" class="block w-full p-4 border border-gray-200 rounded-l-md" placeholder="请输入您的电话号码" required>
+                    <button type="button" id="sendCodeBtn" class="bg-blue-500 text-white px-6 py-4 rounded-r-md hover:bg-blue-600 transition duration-300" onclick="sendCode()">获取验证码</button>
+                </div>
+            </div>
+
+            <div class="question-item mb-6">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">验证码</div>
+                <input type="text" id="verificationCode" class="block w-full p-4 border border-gray-200 rounded-md" placeholder="请输入验证码" required>
+            </div>
+
+            <button type="button"
+                class="submit-btn w-full py-3 bg-green-500 text-white rounded-full font-medium cursor-pointer hover:bg-green-600 transition duration-300"
+                onclick="generateReport()">生成专属测试报告</button>
+        </form>
+
+        <div class="privacy-note text-sm text-gray-500 text-center mt-6">
+            本测试为心理成长工具，非专业心理和投资咨询服务，结果仅供自我认知参考。
+        </div>
+        <div class="copyright text-sm text-gray-500 text-center mt-6">
+            © 2025 尚新峰版权所有
+        </div>
+    </div>
+
+    <script>
+        const testContainer = document.getElementById('testContainer');
+        let verificationCode = '';
+
+        function sendCode() {
+            const phone = document.getElementById('phone').value;
+            if (!/^1[3-9]\d{9}$/.test(phone)) {
+                alert('请输入有效的手机号码');
+                return;
+            }
+            verificationCode = Math.floor(100000 + Math.random() * 900000);
+            alert(`验证码已发送至您的手机，验证码为：${verificationCode}`);
+        }
+
+        function generateReport() {
+            const questions = document.querySelectorAll('[data-question]');
+            for (let i = 0; i < questions.length; i++) {
+                const selected = questions[i].querySelector('input[type="radio"]:checked');
+                if (!selected) {
+                    alert(`您还有第 ${i + 1} 题未作答，请完成该题目后再生成报告。`);
+                    questions[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return;
+                }
+            }
+
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const inputCode = document.getElementById('verificationCode').value;
+
+            if (!name) {
+                alert('请输入您的姓名');
+                return;
+            }
+
+            if (!/^1[3-9]\d{9}$/.test(phone)) {
+                alert('请输入有效的手机号码');
+                return;
+            }
+
+            if (inputCode!== verificationCode.toString()) {
+                alert('验证码输入错误，请重新输入');
+                return;
+            }
+
+            let totalScore = 0;
+            const questionAnswers = [];
+            questions.forEach((question, index) => {
+                const selected = question.querySelector('input[type="radio"]:checked');
+                if (selected) {
+                    totalScore += parseInt(selected.value);
+                    questionAnswers[index] = {
+                        question: question.querySelector('.question-number').textContent,
+                        answer: selected.parentElement.textContent.trim()
+                    };
+                }
+            });
+
+            const impulseIndex = ((24 - totalScore) / 24) * 100;
+            const riskLevel = getRiskLevel(impulseIndex);
+            const recommendations = getCourseRecommendations(riskLevel);
+            const riskAnalysis = getRiskAnalysis(riskLevel);
+
+            const now = new Date();
+            const reportDate = now.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' }) + ' ' + now.toLocaleTimeString('zh-CN');
+
+            const report = `
+                <div class="container bg-white rounded-2xl shadow-xl max-w-3xl w-full p-8 report-container">
+                    <div class="header text-center mb-8">
+                        <h1 class="report-title text-2xl font-bold text-gray-800 mb-2">童年金钱创伤测试报告</h1>
+                        <p class="text-gray-500">基于 12 维度评估，科学解析你的财富心理模式</p>
+                        <p class="text-gray-500">报告生成时间：${reportDate}</p>
+                    </div>
+
+                    <div class="key-data text-lg mb-6">
+                        <p>▶ 姓名：<strong class="text-blue-500">${name}</strong></p>
+                        <p>▶ 电话：<strong class="text-blue-500">${phone}</strong></p>
+                        <p>▶ 冲动消费指数：<strong class="text-blue-500">${impulseIndex.toFixed(1)}分</strong>（越高表示消费理性越弱）</p>
+                        <p>▶ 财富心理风险等级：<strong class="text-blue-500">${riskLevel}</strong></p>
+                    </div>
+
+                    <div class="risk-analysis mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">风险分析</h3>
+                        <p class="text-gray-600">${riskAnalysis}</p>
+                    </div>
+
+                    <div class="recommendation">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">专属课程推荐</h3>
+                        ${recommendations.map(c => `
+                            <div class="course-item p-4 border border-gray-200 rounded-md bg-gray-50 mb-3">
+                                <h4 class="text-base font-semibold text-gray-800">${c.title}</h4>
+                                <p class="text-sm text-gray-600">专属权益：${c.benefits}</p>
+                                <p class="text-sm text-gray-600">价格：<strong class="text-green-500">${c.price.replace(/（.*?）/g, '')}</strong></p>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <button type="button" class="w-full py-3 bg-blue-500 text-white rounded-full font-medium cursor-pointer hover:bg-blue-600 transition duration-300" onclick="consultAdviser()">详情请咨询您的专属顾问</button>
+                    <div class="copyright text-sm text-gray-500 text-center mt-6">
+                        © 2025 尚新峰版权所有
+                    </div>
+                </div>
+            `;
+
+            testContainer.innerHTML = report;
+        }
+
+        function getRiskLevel(score) {
+            if (score > 75) return '高风险 · 创伤型消费模式';
+            if (score > 50) return '中风险 · 焦虑型消费模式';
+            return '低风险 · 健康型消费模式';
+        }
+
+        function getCourseRecommendations(riskLevel) {
+            const courses = [
+                {
+                    title: '3 天财富心理觉醒课',
+                    price: '9.9 元',
+                    value: '打破匮乏感认知，建立基础消费觉知',
+                    benefits: '创伤测试解析+情绪消费日记模板+青铜会员 50 元抵扣券'
+                },
+                {
+                    title: '青铜会员·消费情绪管理系统',
+                    price: '365 元',
+                    value: '量化消费情绪数据，建立科学储蓄习惯',
+                    benefits: '月度数据看板+每周冥想音频+季度导师答疑'
+                },
+                {
+                    title: '白银会员·财富心理重塑计划',
+                    price: '3650 元',
+                    value: 'AI 深度分析消费行为，匹配价值观理财方案',
+                    benefits: '季度 AI 分析报告+专属客服+社群资源对接'
+                }
+            ];
+
+            switch (riskLevel) {
+                case '高风险 · 创伤型消费模式':
+                    return [courses[0], courses[1]];
+                case '中风险 · 焦虑型消费模式':
+                    return [courses[1], courses[2]];
+                default:
+                    return [courses[2]];
+            }
+        }
+
+        function getRiskAnalysis(riskLevel) {
+            switch (riskLevel) {
+                case '高风险 · 创伤型消费模式':
+                    return '您处于高风险的创伤型消费模式，童年时期的金钱经历可能给您带来了较深的创伤，导致您在成年后消费行为较为冲动，难以控制消费欲望。这种模式可能会影响您的财务状况和生活质量，建议您及时调整消费观念和行为。';
+                case '中风险 · 焦虑型消费模式':
+                    return '您处于中风险的焦虑型消费模式，童年的金钱经历可能使您在消费时存在一定的焦虑情绪，偶尔会出现超支情况。您需要更加关注自己的消费行为，增强对消费额度的敏感度，避免因焦虑而导致不必要的消费。';
+                case '低风险 · 健康型消费模式':
+                    return '您处于低风险的健康型消费模式，童年的金钱环境对您的消费心理产生了积极的影响，您能够理性消费，有效管理预算。继续保持现有的消费习惯，有助于您维持良好的财务状况。';
+            }
+        }
+
+        function consultAdviser() {
+            // 这里可以添加咨询顾问的具体逻辑，比如弹出模态框显示顾问联系方式等
+            alert('目前暂未提供具体联系方式，请直接联系您的介绍人！');
+        }
+    </script>
+</body>
+
+</html>
+    
