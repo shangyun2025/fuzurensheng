@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <title>富足人生俱乐部 情绪消费日记</title>
+    <style>
+        .rich-club {
+            color: #FFA500;
+        }
+        .emotional-diary {
+            color: #ffffff;
+        }
+        .suggestion-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .suggestion-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 500px;
+        }
+        .user-info-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        .user-info-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 500px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 font-sans">
+    <nav class="bg-blue-500 p-4 text-white">
+        <div class="container mx-auto flex justify-between items-center">
+            <div>
+                <h1 class="font-bold">
+                    <span class="rich-club block text-2xl">富足人生俱乐部</span>
+                    <span class="emotional-diary block text-xl">情绪消费日记</span>
+                </h1>
+            </div>
+            <ul class="flex space-x-4 md:hidden">
+                <li><a href="#" class="hover:underline"><i class="fa-solid fa-bars"></i></a></li>
+            </ul>
+            <ul class="hidden md:flex space-x-4">
+                <li><a href="#" class="hover:underline">记录</a></li>
+                <li><a href="#" class="hover:underline">统计</a></li>
+                <li><a href="#" id="logoutButton" class="hover:underline">退出</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="mainContent" class="container mx-auto p-4">
+        <div id="record" class="mb-8">
+            <h2 class="text-xl font-bold mb-2">记录消费</h2>
+            <form id="recordForm" class="space-y-4">
+                <div>
+                    <label for="date" class="block text-sm font-medium text-gray-700">日期</label>
+                    <input type="date" id="date" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+                <div>
+                    <label for="amount" class="block text-sm font-medium text-gray-700">金额</label>
+                    <input type="number" id="amount" step="0.01" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+                <div>
+                    <label for="emotion" class="block text-sm font-medium text-gray-700">消费时情绪</label>
+                    <select id="emotion" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                        <option value="">选择情绪</option>
+                        <option value="兴奋">兴奋</option>
+                        <option value="焦虑">焦虑</option>
+                        <option value="压力">压力</option>
+                        <option value="孤独">孤独</option>
+                        <option value="愉悦">愉悦</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="trigger" class="block text-sm font-medium text-gray-700">触发点</label>
+                    <select id="trigger" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                        <option value="">选择触发点</option>
+                        <option value="广告推送">广告推送</option>
+                        <option value="社交比较">社交比较</option>
+                        <option value="场景暗示">场景暗示</option>
+                        <option value="情绪宣泄">情绪宣泄</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="category" class="block text-sm font-medium text-gray-700">消费类别</label>
+                    <select id="category" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                        <option value="">选择消费类别</option>
+                        <optgroup label="生存资料消费">
+                            <option value="食品与饮品">食品与饮品</option>
+                            <option value="住房与家居">住房与家居</option>
+                            <option value="医疗保健">医疗保健</option>
+                            <option value="衣物与鞋包">衣物与鞋包</option>
+                            <option value="交通出行">交通出行</option>
+                        </optgroup>
+                        <optgroup label="发展资料消费">
+                            <option value="教育学习">教育学习</option>
+                            <option value="职业培训">职业培训</option>
+                            <option value="文化艺术修养">文化艺术修养</option>
+                            <option value="健身与运动">健身与运动</option>
+                            <option value="自我提升与成长">自我提升与成长</option>
+                        </optgroup>
+                        <optgroup label="享受资料消费">
+                            <option value="旅游与度假">旅游与度假</option>
+                            <option value="娱乐休闲">娱乐休闲</option>
+                            <option value="奢侈品消费">奢侈品消费</option>
+                            <option value="高端餐饮">高端餐饮</option>
+                            <option value="收藏爱好">收藏爱好</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="flex space-x-4">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">保存记录</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="statistics" class="mb-8">
+            <div class="flex justify-between items-center flex-wrap md:flex-nowrap">
+                <div>
+                    <h2 class="text-xl font-bold mb-2">周/月统计图表（按情绪）</h2>
+                    <div class="flex space-x-4 mb-4 flex-wrap md:flex-nowrap">
+                        <button id="historyButton" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md">历史记录</button>
+                        <button id="weeklyChart" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md">周统计</button>
+                        <button id="monthlyChart" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md">月统计</button>
+                        <button id="optimizationButton" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md">优化建议</button>
+                    </div>
+                </div>
+            </div>
+            <canvas id="chart" class="w-full" width="400" height="200"></canvas>
+        </div>
+
+        <div id="history" class="mb-8 hidden">
+            <h2 class="text-xl font-bold mb-2">历史记录</h2>
+            <div class="flex space-x-4 mb-4 flex-wrap md:flex-nowrap">
+                <input type="date" id="filterDate" class="border border-gray-300 rounded-md px-2 py-1 mb-2 md:mb-0" placeholder="按日期筛选">
+                <select id="filterEmotion" class="border border-gray-300 rounded-md px-2 py-1 mb-2 md:mb-0">
+                    <option value="">全部情绪</option>
+                    <option value="兴奋">兴奋</option>
+                    <option value="焦虑">焦虑</option>
+                    <option value="压力">压力</option>
+                    <option value="孤独">孤独</option>
+                    <option value="愉悦">愉悦</option>
+                </select>
+                <select id="filterTrigger" class="border border-gray-300 rounded-md px-2 py-1 mb-2 md:mb-0">
+                    <option value="">全部触发点</option>
+                    <option value="广告推送">广告推送</option>
+                    <option value="社交比较">社交比较</option>
+                    <option value="场景暗示">场景暗示</option>
+                    <option value="情绪宣泄">情绪宣泄</option>
+                </select>
+                <select id="filterCategory" class="border border-gray-300 rounded-md px-2 py-1 mb-2 md:mb-0">
+                    <option value="">全部消费类别</option>
+                    <optgroup label="生存资料消费">
+                        <option value="食品与饮品">食品与饮品</option>
+                        <option value="住房与家居">住房与家居</option>
+                        <option value="医疗保健">医疗保健</option>
+                        <option value="衣物与鞋包">衣物与鞋包</option>
+                        <option value="交通出行">交通出行</option>
+                    </optgroup>
+                    <optgroup label="发展资料消费">
+                        <option value="教育学习">教育学习</option>
+                        <option value="职业培训">职业培训</option>
+                        <option value="文化艺术修养">文化艺术修养</option>
+                        <option value="健身与运动">健身与运动</option>
+                        <option value="自我提升与成长">自我提升与成长</option>
+                    </optgroup>
+                    <optgroup label="享受资料消费">
+                        <option value="旅游与度假">旅游与度假</option>
+                        <option value="娱乐休闲">娱乐休闲</option>
+                        <option value="奢侈品消费">奢侈品消费</option>
+                        <option value="高端餐饮">高端餐饮</option>
+                        <option value="收藏爱好">收藏爱好</option>
+                    </optgroup>
+                </select>
+                <button id="filterButton" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md mb-2 md:mb-0">筛选</button>
+                <button id="clearFilterButton" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-md">清除筛选</button>
+                <button id="exportButton" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md">导出数据</button>
+            </div>
+            <div class="overflow-x-auto">
+                <table id="historyTable" class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">日期</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">金额</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">情绪</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">触发点</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">消费类别</th>
+                        </tr>
+                    </thead>
+                    <tbody id="historyTableBody" class="bg-white divide-y divide-gray-200"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="suggestion-modal" id="suggestionModal">
+        <div class="suggestion-content">
+            <h2 class="text-xl font-bold mb-2">优化建议</h2>
+            <p id="suggestionText"></p>
+            <div class="flex justify-center mt-4">
+                <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75">详情请咨询您的专属顾问</button>
+            </div>
+            <div class="flex justify-center mt-4">
+                <button id="closeSuggestion" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75">关闭</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="user-info-modal" id="userInfoModal">
+        <div class="user-info-content">
+            <h2 class="text-xl font-bold mb-2">请输入您的信息</h2>
+            <form id="userInfoForm" class="space-y-4">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">姓名</label>
+                    <input type="text" id="name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+                <div>
+                    <label for="phone" class="block text-sm font-medium text-gray-700">手机号</label>
+                    <input type="text" id="phone" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                </div>
+                <div>
+                    <label for="code" class="block text-sm font-medium text-gray-700">验证码</label>
+                    <div class="flex">
+                        <input type="text" id="code" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                        <button type="button" id="sendCodeButton" class="ml-2 bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">发送验证码</button>
+                    </div>
+                </div>
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">提交</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="bg-gray-200 p-4 text-center text-gray-600">
+        © 2025 尚合强版权所有
+    </footer>
+
+    <div class="bg-gray-200 p-4 text-center text-gray-600 text-sm">
+        本测试为个人成长辅助工具，非专业心理和投资咨询服务，结果仅供自我认知参考。
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const users = JSON.parse(localStorage.getItem('users')) || {};
+        let currentUser;
+        let currentChart;
+        let pendingRecord;
+
+        const sendCodeButton = document.getElementById('sendCodeButton');
+        sendCodeButton.addEventListener('click', function () {
+            const phone = document.getElementById('phone').value;
+            if (phone) {
+                const verificationCode = Math.floor(100000 + Math.random() * 900000);
+                alert(`已向 ${phone} 发送验证码，验证码为：${verificationCode}。`);
+            } else {
+                alert('请输入手机号。');
+            }
+        });
+
+        const recordForm = document.getElementById('recordForm');
+        recordForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const date = document.getElementById('date').value;
+            const amount = parseFloat(document.getElementById('amount').value);
+            const emotion = document.getElementById('emotion').value;
+            const trigger = document.getElementById('trigger').value;
+            const category = document.getElementById('category').value;
+
+            if (!date || isNaN(amount) || amount <= 0 || !emotion || !trigger || !category) {
+                alert('请确保日期、金额、消费时情绪、触发点和消费类别都已填写。');
+                return;
+            }
+
+            pendingRecord = { date, amount, emotion, trigger, category };
+
+            if (!currentUser) {
+                const userInfoModal = document.getElementById('userInfoModal');
+                userInfoModal.style.display = 'flex';
+            } else {
+                saveRecord();
+            }
+        });
+
+        const userInfoForm = document.getElementById('userInfoForm');
+        userInfoForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const code = document.getElementById('code').value;
+
+            if (!name || !phone || !code) {
+                alert('请填写完整信息。');
+                return;
+            }
+
+            if (!users[phone]) {
+                users[phone] = {
+                    name: name,
+                    records: [],
+                    membership: null
+                };
+            }
+
+            currentUser = users[phone];
+            const userInfoModal = document.getElementById('userInfoModal');
+            userInfoModal.style.display = 'none';
+            saveRecord();
+            saveUsersToLocalStorage();
+        });
+
+        function saveRecord() {
+            currentUser.records.push(pendingRecord);
+            console.log('记录已保存:', currentUser.records);
+            recordForm.reset();
+            updateChart('weekly');
+            updateHistoryTable();
+            saveUsersToLocalStorage();
+        }
+
+        function updateChart(type) {
+            if (currentChart) {
+                currentChart.destroy();
+            }
+            const ctx = document.getElementById('chart').getContext('2d');
+            let groupedData;
+            if (type === 'weekly') {
+                groupedData = groupByWeekAndEmotion(currentUser.records);
+            } else {
+                groupedData = groupByMonthAndEmotion(currentUser.records);
+            }
+            const labels = Object.keys(groupedData);
+            const amounts = Object.values(groupedData);
+
+            currentChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: `消费金额（${type === 'weekly' ? '周' : '月'}统计）`,
+                        data: amounts,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 205, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgb(255, 99, 132)',
+                            'rgb(54, 162, 235)',
+                            'rgb(255, 205, 86)',
+                            'rgb(75, 192, 192)',
+                            'rgb(153, 102, 255)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function (context) {
+                                    return `${context.label}: ${context.parsed.toFixed(2)} 元`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function groupByWeekAndEmotion(data) {
+            const grouped = {};
+            data.forEach(record => {
+                const date = new Date(record.date);
+                const week = getWeekNumber(date);
+                const key = `第 ${week} 周 - ${record.emotion}`;
+                if (!grouped[key]) {
+                    grouped[key] = 0;
+                }
+                grouped[key] += record.amount;
+            });
+            return grouped;
+        }
+
+        function groupByMonthAndEmotion(data) {
+            const grouped = {};
+            data.forEach(record => {
+                const date = new Date(record.date);
+                const month = date.getMonth() + 1;
+                const key = `${date.getFullYear()} 年 ${month} 月 - ${record.emotion}`;
+                if (!grouped[key]) {
+                    grouped[key] = 0;
+                }
+                grouped[key] += record.amount;
+            });
+            return grouped;
+        }
+
+        function getWeekNumber(date) {
+            const onejan = new Date(date.getFullYear(), 0, 1);
+            const millisecsInDay = 86400000;
+            return Math.ceil((((date - onejan) / millisecsInDay) + onejan.getDay() + 1) / 7);
+        }
+
+        const weeklyChartButton = document.getElementById('weeklyChart');
+        const monthlyChartButton = document.getElementById('monthlyChart');
+        weeklyChartButton.addEventListener('click', function () {
+            updateChart('weekly');
+        });
+        monthlyChartButton.addEventListener('click', function () {
+            updateChart('monthly');
+        });
+
+        const historyButton = document.getElementById('historyButton');
+        const historyDiv = document.getElementById('history');
+        historyButton.addEventListener('click', function () {
+            if (currentUser && currentUser.records.length > 0) {
+                historyDiv.classList.toggle('hidden');
+                historyDiv.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                alert('您还没有消费历史记录信息');
+            }
+        });
+
+        function updateHistoryTable(filteredRecords = currentUser.records) {
+            const historyTableBody = document.getElementById('historyTableBody');
+            historyTableBody.innerHTML = '';
+            filteredRecords.forEach((record) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-6 py-4 whitespace-nowrap">${record.date}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${record.amount}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${record.emotion}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${record.trigger}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">${record.category}</td>
+                `;
+                historyTableBody.appendChild(row);
+            });
+        }
+
+        const filterButton = document.getElementById('filterButton');
+        const clearFilterButton = document.getElementById('clearFilterButton');
+        const filterDate = document.getElementById('filterDate');
+        const filterEmotion = document.getElementById('filterEmotion');
+        const filterTrigger = document.getElementById('filterTrigger');
+        const filterCategory = document.getElementById('filterCategory');
+
+        filterButton.addEventListener('click', function () {
+            const selectedDate = filterDate.value;
+            const selectedEmotion = filterEmotion.value;
+            const selectedTrigger = filterTrigger.value;
+            const selectedCategory = filterCategory.value;
+
+            let filteredRecords = currentUser.records;
+
+            if (selectedDate) {
+                filteredRecords = filteredRecords.filter(record => record.date === selectedDate);
+            }
+            if (selectedEmotion) {
+                filteredRecords = filteredRecords.filter(record => record.emotion === selectedEmotion);
+            }
+            if (selectedTrigger) {
+                filteredRecords = filteredRecords.filter(record => record.trigger === selectedTrigger);
+            }
+            if (selectedCategory) {
+                filteredRecords = filteredRecords.filter(record => record.category === selectedCategory);
+            }
+
+            updateHistoryTable(filteredRecords);
+        });
+
+        clearFilterButton.addEventListener('click', function () {
+            filterDate.value = '';
+            filterEmotion.value = '';
+            filterTrigger.value = '';
+            filterCategory.value = '';
+            updateHistoryTable();
+        });
+
+        const optimizationButton = document.getElementById('optimizationButton');
+        const suggestionModal = document.getElementById('suggestionModal');
+        const suggestionText = document.getElementById('suggestionText');
+        const closeSuggestion = document.getElementById('closeSuggestion');
+
+        optimizationButton.addEventListener('click', function () {
+            if (!currentUser ||!currentUser.records.length) {
+                alert('请先记录一些消费数据，以便生成优化建议。');
+                return;
+            }
+            let totalAmount = 0;
+            const emotionCount = {};
+            const triggerCount = {};
+            const categoryCount = {};
+
+            currentUser.records.forEach(record => {
+                totalAmount += record.amount;
+                emotionCount[record.emotion] = (emotionCount[record.emotion] || 0) + 1;
+                triggerCount[record.trigger] = (triggerCount[record.trigger] || 0) + 1;
+                categoryCount[record.category] = (categoryCount[record.category] || 0) + 1;
+            });
+
+            let suggestion = `您的总消费金额为 <strong>${totalAmount.toFixed(2)}</strong> 元。<br>`;
+
+            let dominantEmotion = Object.keys(emotionCount).reduce((a, b) => emotionCount[a] > emotionCount[b] ? a : b);
+            let dominantTrigger = Object.keys(triggerCount).reduce((a, b) => triggerCount[a] > triggerCount[b] ? a : b);
+            let dominantCategory = Object.keys(categoryCount).reduce((a, b) => categoryCount[a] > categoryCount[b] ? a : b);
+
+            suggestion += `您最常伴随的消费情绪是 <strong>${dominantEmotion}</strong>，最常见的消费触发点是 <strong>${dominantTrigger}</strong>，最常消费的类别是 <strong>${dominantCategory}</strong>。<br><br>`;
+
+            if (totalAmount < 1000) {
+                suggestion += '您的消费金额相对较低，可能处于财富积累的初期。建议您可以加入我们的青铜会员，费用为 365 元/年。<br>青铜会员可以帮助您建立基础财富心理认知，通过完整版《金钱心理测评》（含家族影响分析）了解自己的消费情绪，每周 2 次的冥想音频可以帮助您缓解情绪波动，月度消费情绪数据看板能让您量化消费情绪，逐步改善消费习惯。<br>';
+            } else if (totalAmount < 5000) {
+                suggestion += '您的消费金额处于中等水平，可能已经有了一定的财富基础，但在消费决策上还存在困惑。推荐您升级为白银会员，费用是 3,650 元/年。<br>白银会员提供季度消费行为 AI 分析报告，能帮助您深入了解自己的消费行为，周五的“财富心理故事会”和月度价值观升级工作坊可以通过社群陪伴和交流，提升您的价值观匹配度，使消费更加理性。<br>';
+            } else {
+                suggestion += '您的消费金额较高，可能已经积累了大量财富，开始关注家族财富的长期规划和传承。建议您选择黄金会员，费用为 9,999 元/年。<br>黄金会员提供年度 4 次 1v1 价值观心理教练服务，为您提供个性化的价值观指导，行为金融适配分析系统（参考实盘数据）能为您提供更精准的投资建议，季度跨行业价值观沙龙则为您提供对接高端资源和跨行业合作的机会，有助于家族财富的传承和增长。<br>';
+            }
+
+            suggestionText.innerHTML = suggestion;
+            suggestionModal.style.display = 'flex';
+        });
+
+        closeSuggestion.addEventListener('click', function () {
+            suggestionModal.style.display = 'none';
+        });
+
+        function saveUsersToLocalStorage() {
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        const exportButton = document.getElementById('exportButton');
+        exportButton.addEventListener('click', function () {
+            if (currentUser) {
+                const csvContent = convertToCSV(currentUser.records);
+                const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+                const link = document.createElement('a');
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', 'user_consumption_records.csv');
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            } else {
+                alert('请先记录消费数据');
+            }
+        });
+
+        function convertToCSV(data) {
+            const header = ['日期', '金额', '情绪', '触发点', '消费类别'];
+            const csvRows = [];
+            csvRows.push(header.join(','));
+            data.forEach(record => {
+                const row = [record.date, record.amount, record.emotion, record.trigger, record.category];
+                csvRows.push(row.join(','));
+            });
+            return csvRows.join('\n');
+        }
+
+        if (currentUser) {
+            updateChart('weekly');
+        }
+    </script>
+</body>
+
+</html>
+    
