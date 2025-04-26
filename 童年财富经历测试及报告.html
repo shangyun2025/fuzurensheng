@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>童年财富经历测试及报告</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .custom-box {
+            border: 2px solid #e5e7eb;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            text-align: left;
+            background-color: #f9fafb;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex justify-center items-center min-h-screen">
+    <div class="container bg-white rounded-2xl shadow-xl max-w-3xl w-full p-8" id="testContainer">
+        <div class="header text-center mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">富足人生俱乐部</h2>
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">童年财富经历测试</h1>
+            <div class="custom-box">
+                <p class="text-gray-500">童年时期的金钱经历会深刻影响个人的财富心理。本测试科学评估了原生家庭对财富心理的影响。了解童年金钱创伤，帮助我们认识自身在金钱观念和行为上的潜在问题，从而有针对性地调整，迈向更富足的人生。 </p>
+            </div>
+        </div>
+
+        <form id="testForm">
+            <div class="question-item mb-6" data-question="1">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">1. 父母如何谈论金钱？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q1" value="0" required> "钱很难赚，省着花"等负面评价
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q1" value="1"> 回避金钱话题，很少讨论
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q1" value="2"> 理性讨论收支，引导合理消费
+                </label>
+            </div>
+
+            <div class="question-item mb-6" data-question="2">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">2. 童年零花钱管理方式？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q2" value="0" required> 无零花钱，临时申请常被拒绝
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q2" value="1"> 有固定零花钱，但金额极少/需任务兑换
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q2" value="2"> 合理零花钱，引导制定消费计划
+                </label>
+            </div>
+
+            <div class="question-item mb-6" data-question="3">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">3. 想要买玩具时父母反应？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q3" value="0" required> 批评浪费，直接拒绝（即使负担得起）
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q3" value="1"> 以"太贵"为由拒绝，偶尔满足
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q3" value="2"> 询问需求，共同决定是否购买
+                </label>
+            </div>
+
+            <div class="question-item mb-6" data-question="4">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">4. 家庭经济困难时父母表现？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q4" value="0" required> 争吵抱怨，让你感到焦虑不安
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q4" value="1"> 默默承受，家庭氛围压抑但不沟通
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q4" value="2"> 坦诚沟通困难，一起寻找解决办法
+                </label>
+            </div>
+
+            <div class="question-item mb-6" data-question="5">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">5. 父母是否限制兴趣班/活动？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q5" value="0" required> 频繁限制，导致错过重要机会
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q5" value="1"> 偶尔限制，让你感到遗憾
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q5" value="2"> 支持发展兴趣，无经济限制
+                </label>
+            </div>
+
+            <div class="question-item mb-6" data-question="6">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">6. 童年是否因钱感到自卑？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q6" value="0" required> 经常自卑，觉得不如其他孩子
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q6" value="1"> 看到他人拥有时会短暂羡慕
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q6" value="2"> 对物质条件感到满意，无自卑心理
+                </label>
+            </div>
+
+            <div class="question-item mb-6" data-question="7">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">7. 父母是否拿你和他人比较消费习惯？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q7" value="0" required> 经常比较，指责你不会管理钱
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q7" value="1"> 偶尔提及，希望你学习他人优点
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q7" value="2"> 尊重你的习惯，从不进行比较
+                </label>
+            </div>
+
+            <div class="question-item mb-6" data-question="8">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">8. 你通过劳动赚零花钱时父母态度？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q8" value="0" required> 不支持，认为学生不应赚钱
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q8" value="1"> 不反对，但不提供指导
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q8" value="2"> 积极鼓励，教你规划使用零花钱
+                </label>
+            </div>
+
+            <div class="question-item mb-6" data-question="9">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">9. 父母是否谈论过"赚钱辛苦"相关话题？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q9" value="0" required> 反复强调赚钱难，灌输匮乏感
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q9" value="1"> 偶尔提及，但未深入讨论
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q9" value="2"> 客观分析金钱价值，不传递焦虑
+                </label>
+            </div>
+
+            <div class="question-item mb-6" data-question="10">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">10. 家庭是否有明确的金钱规则（如记账、储蓄）？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q10" value="0" required> 无规则，消费随意无规划
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q10" value="1"> 有简单规则，但未严格执行
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q10" value="2"> 制定明确规则，引导你养成理财习惯
+                </label>
+            </div>
+
+            <div class="question-item mb-6" data-question="11">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">11. 父母是否因金钱问题贬低你的需求？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q11" value="0" required> 经常贬低，说"你的需求不重要"
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q11" value="1"> 偶尔忽视，但会满足基本需求
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q11" value="2"> 尊重你的需求，合理评估后回应
+                </label>
+            </div>
+
+            <div class="question-item mb-6" data-question="12">
+                <div class="question-number text-lg font-semibold text-gray-800 mb-3">12. 成年后是否经常出现无意识超支？</div>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="0">
+                    <input type="radio" name="q12" value="0" required> 频繁超支，难以控制消费欲望
+                </label>
+                <label class="option-label block mb-2 p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="1">
+                    <input type="radio" name="q12" value="1"> 偶尔超支，对消费额度缺乏敏感度
+                </label>
+                <label class="option-label block p-4 border border-gray-200 rounded-md cursor-pointer hover:bg-gray-100 transition duration-300"
+                    data-score="2">
+                    <input type="radio" name="q12" value="2"> 消费理性，能有效管理预算
+                </label>
+            </div>
+
+            <button type="button"
+                class="submit-btn w-full py-3 bg-green-500 text-white rounded-full font-medium cursor-pointer hover:bg-green-600 transition duration-300"
+                onclick="generateReport()">生成专属测试报告</button>
+        </form>
+
+        <div class="privacy-note text-sm text-gray-500 text-center mt-6">
+            本测试为个人成长辅助工具，非专业心理和投资咨询服务，结果仅供自我认知参考。
+        </div>
+        <div class="copyright text-sm text-gray-500 text-center mt-6">
+            © 2025 尚合强版权所有
+        </div>
+    </div>
+
+    <script>
+        const testContainer = document.getElementById('testContainer');
+
+        function generateReport() {
+            const questions = document.querySelectorAll('[data-question]');
+            for (let i = 0; i < questions.length; i++) {
+                const selected = questions[i].querySelector('input[type="radio"]:checked');
+                if (!selected) {
+                    alert(`您还有第 ${i + 1} 题未作答，请完成该题目后再生成报告。`);
+                    questions[i].scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    return;
+                }
+            }
+
+            let totalScore = 0;
+            questions.forEach(question => {
+                const selected = question.querySelector('input[type="radio"]:checked');
+                if (selected) totalScore += parseInt(selected.value);
+            });
+
+            const impulseIndex = ((24 - totalScore) / 24) * 100;
+            const riskLevel = getRiskLevel(impulseIndex);
+            const recommendations = getCourseRecommendations(riskLevel);
+
+            const now = new Date();
+            const reportDate = now.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' }) + ' ' + now.toLocaleTimeString('zh-CN');
+
+            const riskLevelExplanation = getRiskLevelExplanation(riskLevel);
+
+            const report = `
+                <div class="container bg-white rounded-2xl shadow-xl max-w-3xl w-full p-8 report-container">
+                    <div class="header text-center mb-8">
+                        <h2 class="report-title text-2xl font-bold text-gray-800 mb-2">富足人生俱乐部</h2>
+                        <h1 class="report-title text-3xl font-bold text-gray-800 mb-2">童年财富经历测试报告</h1>
+                        <p class="text-gray-500">基于12维度评估，科学解析你的财富心理模式</p>
+                        <p class="text-gray-500">报告生成时间：${reportDate}</p>
+                    </div>
+
+                    <div class="key-data text-lg mb-6">
+                        <p>▶ 冲动消费指数：<strong class="text-blue-500">${impulseIndex.toFixed(1)}分</strong>（越高表示消费理性越弱）</p>
+                        <p>▶ 财富心理风险等级：<strong class="text-blue-500">${riskLevel}</strong></p>
+                    </div>
+
+                    <div class="risk-explanation mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2">风险等级解释</h3>
+                        <p class="text-gray-600">${riskLevelExplanation}</p>
+                    </div>
+
+                    <div class="recommendation">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-4">专属课程推荐</h3>
+                        ${recommendations.map(c => `
+                            <div class="course-item p-4 border border-gray-200 rounded-md bg-gray-50 mb-3">
+                                <h4 class="text-base font-semibold text-gray-800">${c.title}</h4>
+                                <p class="text-sm text-gray-600">课程价值：${c.value}</p>
+                                <p class="text-sm text-gray-600">专属权益：${c.benefits}</p>
+                                <p class="text-sm text-gray-600">价格：<strong class="text-green-500">${c.price.replace(/（.*?）/g, '')}</strong></p>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="consultation text-center mt-6">
+                        <a href="#" class="bg-green-500 text-white py-2 px-4 rounded-full font-medium hover:bg-green-600 transition duration-300">详情请咨询您的专属顾问</a>
+                    </div>
+                    <div class="copyright text-sm text-gray-500 text-center mt-6">
+                        © 2025 尚合强版权所有
+                    </div>
+                </div>
+            `;
+
+            testContainer.innerHTML = report;
+        }
+
+        function getRiskLevel(score) {
+            if (score > 75) return '高风险 · 创伤型消费模式';
+            if (score > 50) return '中风险 · 焦虑型消费模式';
+            return '低风险 · 健康型消费模式';
+        }
+
+        function getCourseRecommendations(riskLevel) {
+            const courses = [
+                {
+                    title: '3天财富心理觉醒课（引流课）',
+                    price: '9.9元',
+                    value: '打破匮乏感认知，建立基础消费觉知',
+                    benefits: '创伤测试解析+情绪消费日记模板+青铜会员50元抵扣券'
+                },
+                {
+                    title: '青铜会员·消费管理系统（存富）',
+                    price: '365元',
+                    value: '量化消费情绪数据，建立科学储蓄习惯',
+                    benefits: '月度数据看板+每周冥想音频+季度导师答疑+社群365天陪伴服务'
+                },
+                {
+                    title: '白银会员·财富心理重塑计划（增富）',
+                    price: '3650元',
+                    value: 'AI深度分析消费行为，匹配价值观理财方案',
+                    benefits: '青铜会员所有权益+季度AI分析报告+专属客服+社群资源对接+增加收入'
+                }
+            ];
+
+            switch (riskLevel) {
+                case '高风险 · 创伤型消费模式':
+                    return [courses[0], courses[1]];
+                case '中风险 · 焦虑型消费模式':
+                    return [courses[1], courses[2]];
+                default:
+                    return [courses[2]];
+            }
+        }
+
+        function getRiskLevelExplanation(riskLevel) {
+            switch (riskLevel) {
+                case '高风险 · 创伤型消费模式':
+                    return '此模式表明您可能在童年时期经历了较为严重的金钱相关创伤，这些创伤对您成年后的消费行为产生了显著的负面影响。您可能会频繁出现难以控制的冲动消费，消费行为往往缺乏理性思考，容易受到情绪和过去经历的影响。这可能导致您在财务上陷入困境，难以实现储蓄和理财目标。';
+                case '中风险 · 焦虑型消费模式':
+                    return '处于这种模式意味着您在童年时受到的金钱相关影响使您在消费过程中存在一定程度的焦虑情绪。您可能偶尔会出现超支情况，对消费额度缺乏足够的敏感度。这种焦虑可能源于对未来经济状况的担忧，或者是过去经历中形成的不安全感，导致您在消费决策时难以保持完全的理性。';
+                case '低风险 · 健康型消费模式':
+                    return '这说明您在童年时期的金钱环境相对健康，培养了良好的消费习惯和理性的财富心理。您能够有效地管理预算，消费行为较为理性，不会轻易受到冲动消费的影响。您对自己的财务状况有清晰的认识，并且能够合理地规划和支配资金，有助于实现长期的财务稳定和目标。';
+            }
+        }
+    </script>
+</body>
+
+</html>
+    
