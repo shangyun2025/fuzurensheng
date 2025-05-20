@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>财富思维测评 - 发现你的投资DNA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind 配置 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#165DFF',
+                        secondary: '#FF7D00',
+                        tertiary: '#36D399',
+                        dark: '#1E293B',
+                        light: '#F8FAFC'
+                    },
+                    fontFamily: {
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                },
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .card-hover {
+                transition: all 0.3s ease;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+            .progress-bar {
+                transition: width 0.5s ease;
+            }
+        }
+    </style>
+</head>
+<body class="font-inter bg-light text-dark min-h-screen flex flex-col">
+    <!-- 导航栏 -->
+    <header id="navbar" class="fixed w-full bg-white/90 backdrop-blur-md shadow-sm z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+                    <i class="fa-solid fa-line-chart text-white text-xl"></i>
+                </div>
+                <h1 class="text-xl font-bold text-primary">财富思维测评</h1>
+            </div>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="text-dark/80 hover:text-primary transition-colors">关于测评</a>
+                <a href="#features" class="text-dark/80 hover:text-primary transition-colors">核心功能</a>
+                <a href="#sample" class="text-dark/80 hover:text-primary transition-colors">报告示例</a>
+                <a href="#pricing" class="text-dark/80 hover:text-primary transition-colors">价格</a>
+                <a href="#faq" class="text-dark/80 hover:text-primary transition-colors">常见问题</a>
+            </nav>
+            <div class="flex items-center space-x-4">
+                <button id="loginBtn" class="hidden md:block px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary/5 transition-colors">登录</button>
+                <button id="startBtn" class="px-5 py-2.5 rounded-lg bg-primary text-white shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all">
+                    立即开始 <i class="fa-solid fa-arrow-right ml-1"></i>
+                </button>
+                <button id="menuBtn" class="md:hidden text-dark/80">
+                    <i class="fa-solid fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <!-- 移动端菜单 -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-gray-100 py-4 px-4 absolute w-full shadow-md">
+            <nav class="flex flex-col space-y-4">
+                <a href="#about" class="text-dark/80 hover:text-primary transition-colors py-2">关于测评</a>
+                <a href="#features" class="text-dark/80 hover:text-primary transition-colors py-2">核心功能</a>
+                <a href="#sample" class="text-dark/80 hover:text-primary transition-colors py-2">报告示例</a>
+                <a href="#pricing" class="text-dark/80 hover:text-primary transition-colors py-2">价格</a>
+                <a href="#faq" class="text-dark/80 hover:text-primary transition-colors py-2">常见问题</a>
+                <button id="mobileLoginBtn" class="w-full px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary/5 transition-colors">登录</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 英雄区 -->
+    <section class="pt-28 pb-20 md:pt-40 md:pb-32 bg-gradient-to-br from-primary/5 to-white">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 md:pr-12">
+                <h1 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-tight text-dark mb-6">
+                    解密你的<span class="text-primary">投资心理</span><br>开启财富增长新维度
+                </h1>
+                <p class="text-lg text-dark/70 mb-8 max-w-xl">
+                    完成10道专业测试题，获取基于行为金融学的深度分析报告，发现潜在认知偏差，定制专属投资策略。
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-10">
+                    <button id="heroStartBtn" class="px-8 py-4 rounded-xl bg-primary text-white text-lg font-medium shadow-xl shadow-primary/20 hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-1 transition-all flex items-center justify-center">
+                        <i class="fa-solid fa-play-circle mr-2"></i> 开始免费测评
+                    </button>
+                    <button class="px-8 py-4 rounded-xl border-2 border-primary text-primary text-lg font-medium hover:bg-primary/5 transition-all flex items-center justify-center">
+                        <i class="fa-solid fa-file-text mr-2"></i> 查看报告示例
+                    </button>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="flex -space-x-2">
+                        <img src="https://picsum.photos/id/1001/40/40" alt="用户头像" class="w-10 h-10 rounded-full border-2 border-white">
+                        <img src="https://picsum.photos/id/1002/40/40" alt="用户头像" class="w-10 h-10 rounded-full border-2 border-white">
+                        <img src="https://picsum.photos/id/1003/40/40" alt="用户头像" class="w-10 h-10 rounded-full border-2 border-white">
+                        <img src="https://picsum.photos/id/1004/40/40" alt="用户头像" class="w-10 h-10 rounded-full border-2 border-white">
+                        <div class="w-10 h-10 rounded-full bg-primary/10 border-2 border-white flex items-center justify-center text-primary font-medium text-xs">
+                            10k+
+                        </div>
+                    </div>
+                    <div class="text-sm text-dark/70">
+                        <span class="font-semibold text-primary">10,000+</span> 用户已完成测评
+                        <div class="flex items-center mt-1">
+                            <div class="flex text-yellow-400">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star-half-stroke"></i>
+                            </div>
+                            <span class="ml-1 text-dark/70">4.8/5 评分</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="md:w-1/2 mt-12 md:mt-0 relative">
+                <div class="bg-white rounded-2xl shadow-2xl overflow-hidden relative z-10">
+                    <img src="https://picsum.photos/id/1/600/400" alt="测评界面" class="w-full h-auto">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end">
+                        <div class="p-6 text-white">
+                            <div class="flex items-center mb-3">
+                                <div class="w-3 h-3 rounded-full bg-tertiary animate-pulse mr-2"></div>
+                                <span class="text-sm font-medium">实时生成个性化报告</span>
+                            </div>
+                            <h3 class="text-xl font-bold mb-2">发现你的投资性格</h3>
+                            <p class="text-white/80 text-sm">基于行为金融学的科学评估</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute -top-6 -right-6 w-24 h-24 bg-secondary/20 rounded-full blur-2xl"></div>
+                <div class="absolute -bottom-8 -left-8 w-32 h-32 bg-primary/20 rounded-full blur-3xl"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于测评 -->
+    <section id="about" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] font-bold text-dark mb-4">为什么选择我们的测评？</h2>
+                <p class="text-dark/70 text-lg">
+                    基于行为金融学理论，结合AI算法分析，为你提供深度的投资心理洞察和科学的资产配置建议
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl shadow-lg p-8 card-hover border border-gray-100">
+                    <div class="w-16 h-16 rounded-xl bg-primary/10 flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-brain text-primary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">科学评估体系</h3>
+                    <p class="text-dark/70">
+                        融合行为金融学、认知心理学和大数据分析，多维度解析你的投资决策模式，识别潜在认知偏差。
+                    </p>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-lg p-8 card-hover border border-gray-100">
+                    <div class="w-16 h-16 rounded-xl bg-secondary/10 flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-chart-line text-secondary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">个性化投资策略</h3>
+                    <p class="text-dark/70">
+                        根据你的风险偏好、投资目标和心理特征，生成量身定制的资产配置方案，推荐适合的投资产品。
+                    </p>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-lg p-8 card-hover border border-gray-100">
+                    <div class="w-16 h-16 rounded-xl bg-tertiary/10 flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-shield-check text-tertiary text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">持续财富管理</h3>
+                    <p class="text-dark/70">
+                        定期跟踪你的投资心理变化，市场波动时提供情绪管理指南，帮助你做出理性投资决策。
+                    </p>
+                </div>
+            </div>
+            
+            <div class="mt-16 bg-gradient-to-r from-primary/5 to-tertiary/5 rounded-2xl p-8 md:p-12">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-2/3 mb-8 md:mb-0 md:pr-12">
+                        <h3 class="text-2xl font-bold mb-4">基于全球10万+投资者数据验证</h3>
+                        <p class="text-dark/70 mb-6">
+                            我们的测评体系经过严格的科学验证，与实际投资表现高度相关。数据显示，遵循测评建议的投资者平均年化收益率比市场基准高7.2%。
+                        </p>
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-primary mb-1">98%</div>
+                                <div class="text-sm text-dark/70">用户满意度</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-primary mb-1">23项</div>
+                                <div class="text-sm text-dark/70">认知偏差检测</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-primary mb-1">10万+</div>
+                                <div class="text-sm text-dark/70">用户数据</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold text-primary mb-1">12家</div>
+                                <div class="text-sm text-dark/70">金融机构合作</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="md:w-1/3">
+                        <div class="bg-white rounded-xl shadow-lg p-6">
+                            <canvas id="performanceChart" width="300" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 核心功能 -->
+    <section id="features" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] font-bold text-dark mb-4">深度解析你的投资心理</h2>
+                <p class="text-dark/70 text-lg">
+                    从多个维度全面评估你的投资行为特征，帮助你了解真实的投资心理状态
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <div class="p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mr-4">
+                                <i class="fa-solid fa-balance-scale text-primary text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">风险偏好评估</h3>
+                        </div>
+                        <p class="text-dark/70 mb-6">
+                            精确测量你对风险的承受能力和态度，识别潜在的风险误判，帮助你找到风险与收益的最佳平衡点。
+                        </p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">损失厌恶程度分析</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">风险回报权衡倾向</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">不确定性容忍度评估</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-dark/70">样本报告预览</span>
+                            <button class="text-primary hover:underline">查看详情 <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <div class="p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 rounded-xl bg-secondary/10 flex items-center justify-center mr-4">
+                                <i class="fa-solid fa-lightbulb text-secondary text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">认知偏差检测</h3>
+                        </div>
+                        <p class="text-dark/70 mb-6">
+                            识别影响投资决策的23种常见认知偏差，如过度自信、锚定效应、羊群行为等，帮助你避免非理性决策。
+                        </p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">确认偏误与选择性感知</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">处置效应与沉没成本</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">近期偏差与可得性偏差</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-dark/70">样本报告预览</span>
+                            <button class="text-primary hover:underline">查看详情 <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <div class="p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 rounded-xl bg-tertiary/10 flex items-center justify-center mr-4">
+                                <i class="fa-solid fa-pie-chart text-tertiary text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">资产配置建议</h3>
+                        </div>
+                        <p class="text-dark/70 mb-6">
+                            根据你的投资心理特征，生成科学的资产配置方案，推荐适合你的投资产品组合，实现风险分散和收益最大化。
+                        </p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">个性化投资组合模型</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">产品类型与风格适配</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">动态再平衡策略</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-dark/70">样本报告预览</span>
+                            <button class="text-primary hover:underline">查看详情 <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <div class="p-8">
+                        <div class="flex items-center mb-6">
+                            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mr-4">
+                                <i class="fa-solid fa-calendar-check text-primary text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold">投资行为优化</h3>
+                        </div>
+                        <p class="text-dark/70 mb-6">
+                            提供针对性的行为矫正方案，帮助你克服投资心理弱点，建立健康的投资习惯和决策流程。
+                        </p>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">情绪管理与决策流程</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">投资纪律与执行策略</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">长期投资心态培养</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 p-6">
+                        <div class="flex justify-between items-center">
+                            <span class="text-dark/70">样本报告预览</span>
+                            <button class="text-primary hover:underline">查看详情 <i class="fa-solid fa-arrow-right ml-1"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 报告示例 -->
+    <section id="sample" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] font-bold text-dark mb-4">深度报告示例</h2>
+                <p class="text-dark/70 text-lg">
+                    完成测评后，你将获得一份专业的财富思维报告，全面解析你的投资心理特征
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2">
+                    <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 relative">
+                        <img src="https://picsum.photos/id/20/800/500" alt="报告预览" class="w-full h-auto">
+                        <div class="absolute top-4 right-4 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+                            动态交互报告
+                        </div>
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                            <h3 class="text-xl font-bold text-white mb-2">投资心理类型分析</h3>
+                            <p class="text-white/80 text-sm">
+                                基于你的回答，系统生成专属的投资心理画像，识别你的优势与潜在风险
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="flex flex-col justify-between">
+                    <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-100 mb-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center mr-3">
+                                <i class="fa-solid fa-chart-pie text-primary"></i>
+                            </div>
+                            <h4 class="font-bold">风险承受能力雷达图</h4>
+                        </div>
+                        <p class="text-dark/70 text-sm mb-4">
+                            直观展示你在不同风险维度上的表现，帮助你了解自己的风险偏好特征
+                        </p>
+                        <div class="h-48">
+                            <canvas id="riskRadarChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-2xl shadow-lg p-6 border border-gray-100">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-secondary/10 flex items-center justify-center mr-3">
+                                <i class="fa-solid fa-list-check text-secondary"></i>
+                            </div>
+                            <h4 class="font-bold">认知偏差检测结果</h4>
+                        </div>
+                        <p class="text-dark/70 text-sm mb-4">
+                            识别影响你投资决策的主要认知偏差，提供针对性的矫正建议
+                        </p>
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-dark/80">损失厌恶倾向</span>
+                                <div class="w-24 bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-red-500 h-2.5 rounded-full" style="width: 75%"></div>
+                                </div>
+                                <span class="text-sm font-medium">高</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-dark/80">过度自信程度</span>
+                                <div class="w-24 bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-orange-500 h-2.5 rounded-full" style="width: 55%"></div>
+                                </div>
+                                <span class="text-sm font-medium">中</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-dark/80">羊群行为倾向</span>
+                                <div class="w-24 bg-gray-200 rounded-full h-2.5">
+                                    <div class="bg-green-500 h-2.5 rounded-full" style="width: 30%"></div>
+                                </div>
+                                <span class="text-sm font-medium">低</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <button class="px-8 py-3 rounded-xl border-2 border-primary text-primary font-medium hover:bg-primary/5 transition-all">
+                    查看完整报告示例 <i class="fa-solid fa-arrow-right ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 价格方案 -->
+    <section id="pricing" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] font-bold text-dark mb-4">选择适合你的方案</h2>
+                <p class="text-dark/70 text-lg">
+                    我们提供多种价位的测评方案，满足不同用户的需求
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- 基础版 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 transition-all hover:shadow-xl">
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-2">基础版</h3>
+                        <p class="text-dark/70 mb-6">适合初次了解投资心理的用户</p>
+                        <div class="flex items-end mb-6">
+                            <span class="text-4xl font-bold">¥0</span>
+                            <span class="text-dark/70 ml-2">一次性付费</span>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">完整10题测评</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">基础投资心理类型分析</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">1页PDF报告</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">基础资产配置建议</span>
+                            </li>
+                            <li class="flex items-start text-dark/40">
+                                <i class="fa-solid fa-times mt-1 mr-2"></i>
+                                <span>认知偏差深度分析</span>
+                            </li>
+                            <li class="flex items-start text-dark/40">
+                                <i class="fa-solid fa-times mt-1 mr-2"></i>
+                                <span>个性化投资策略</span>
+                            </li>
+                            <li class="flex items-start text-dark/40">
+                                <i class="fa-solid fa-times mt-1 mr-2"></i>
+                                <span>专家1对1咨询</span>
+                            </li>
+                        </ul>
+                        <button class="w-full py-3 rounded-xl bg-gray-100 text-dark font-medium hover:bg-gray-200 transition-all">
+                            选择基础版
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 进阶版 -->
+                <div class="bg-white rounded-2xl shadow-xl overflow-hidden border-2 border-primary relative transform scale-105 z-10">
+                    <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1 rounded-bl-lg">
+                        最受欢迎
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-2">进阶版</h3>
+                        <p class="text-dark/70 mb-6">适合希望深入了解投资心理的用户</p>
+                        <div class="flex items-end mb-6">
+                            <span class="text-4xl font-bold">¥399</span>
+                            <span class="text-dark/70 ml-2">一次性付费</span>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">完整10题测评</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">全面投资心理类型分析</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">5页PDF报告+交互图表</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">详细资产配置建议</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">认知偏差深度分析与矫正</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">个性化投资策略</span>
+                            </li>
+                            <li class="flex items-start text-dark/40">
+                                <i class="fa-solid fa-times mt-1 mr-2"></i>
+                                <span>专家1对1咨询</span>
+                            </li>
+                        </ul>
+                        <button class="w-full py-3 rounded-xl bg-primary text-white font-medium shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 transition-all">
+                            选择进阶版
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 专业版 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 transition-all hover:shadow-xl">
+                    <div class="p-8">
+                        <h3 class="text-xl font-bold mb-2">专业版</h3>
+                        <p class="text-dark/70 mb-6">适合需要专业投资指导的用户</p>
+                        <div class="flex items-end mb-6">
+                            <span class="text-4xl font-bold">¥1999</span>
+                            <span class="text-dark/70 ml-2">一次性付费</span>
+                        </div>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">完整10题测评</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">深度投资心理分析</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">10页专业级PDF报告+交互图表</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">定制化资产配置方案</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">认知偏差全面分析与矫正方案</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">个性化投资策略与执行计划</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-tertiary mt-1 mr-2"></i>
+                                <span class="text-dark/80">30分钟专家1对1咨询</span>
+                            </li>
+                        </ul>
+                        <button class="w-full py-3 rounded-xl bg-gray-100 text-dark font-medium hover:bg-gray-200 transition-all">
+                            选择专业版
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 bg-white rounded-2xl shadow-lg p-8 max-w-4xl mx-auto">
+                <h3 class="text-xl font-bold mb-6 text-center">企业/机构定制方案</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                            <i class="fa-solid fa-users text-primary text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">员工福利</h4>
+                        <p class="text-dark/70 text-sm">为员工提供专业的投资心理测评，提升财务健康水平</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 rounded-full bg-secondary/10 flex items-center justify-center mx-auto mb-4">
+                            <i class="fa-solid fa-briefcase text-secondary text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">客户增值服务</h4>
+                        <p class="text-dark/70 text-sm">作为金融机构客户服务的增值项目，提升客户粘性</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 rounded-full bg-tertiary/10 flex items-center justify-center mx-auto mb-4">
+                            <i class="fa-solid fa-graduation-cap text-tertiary text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">教育机构合作</h4>
+                        <p class="text-dark/70 text-sm">融入金融教育课程，帮助学生了解自身投资心理</p>
+                    </div>
+                </div>
+                <div class="mt-8 text-center">
+                    <button class="px-8 py-3 rounded-xl border-2 border-primary text-primary font-medium hover:bg-primary/5 transition-all">
+                        联系我们获取企业方案 <i class="fa-solid fa-arrow-right ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 用户评价 -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] font-bold text-dark mb-4">用户怎么说</h2>
+                <p class="text-dark/70 text-lg">
+                    来自真实用户的反馈，了解他们使用测评后的收获
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 card-hover">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-dark/80 mb-6">
+                        "测评结果非常准确，指出了我在投资中的'损失厌恶'倾向，按照建议调整了投资策略后，去年的收益比之前提高了15%！"
+                    </p>
+                    <div class="flex items-center">
+                        <img src="https://picsum.photos/id/1012/60/60" alt="用户头像" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">陈先生</h4>
+                            <p class="text-dark/60 text-sm">企业高管 · 35岁</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 card-hover">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <p class="text-dark/80 mb-6">
+                        "花99元买的不是报告，是避免了可能损失的9900元！测评让我意识到自己有'过度交易'的问题，现在我学会了耐心等待更好的机会。"
+                    </p>
+                    <div class="flex items-center">
+                        <img src="https://picsum.photos/id/1005/60/60" alt="用户头像" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">李先生</h4>
+                            <p class="text-dark/60 text-sm">资深投资者 · 42岁</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100 card-hover">
+                    <div class="flex text-yellow-400 mb-4">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star-half-stroke"></i>
+                    </div>
+                    <p class="text-dark/80 mb-6">
+                        "客服的电话解读太专业了，帮我理清了家庭资产配置的优先级。现在我和妻子按照报告调整了投资组合，家庭财务状况更加稳健。"
+                    </p>
+                    <div class="flex items-center">
+                        <img src="https://picsum.photos/id/1027/60/60" alt="用户头像" class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-bold">王女士</h4>
+                            <p class="text-dark/60 text-sm">创业者 · 28岁</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <button class="px-8 py-3 rounded-xl border-2 border-primary text-primary font-medium hover:bg-primary/5 transition-all">
+                    查看更多用户评价 <i class="fa-solid fa-arrow-right ml-1"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 常见问题 -->
+    <section id="faq" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] font-bold text-dark mb-4">常见问题</h2>
+                <p class="text-dark/70 text-lg">
+                    解答你可能关心的问题
+                </p>
+            </div>
+            
+            <div class="max-w-3xl mx-auto space-y-4">
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-4 text-left font-medium flex justify-between items-center">
+                        <span>测评结果的准确性如何保证？</span>
+                        <i class="fa-solid fa-plus text-primary transition-transform"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-4 hidden">
+                        <p class="text-dark/70">
+                            我们的测评体系基于行为金融学的科学理论，并结合了超过10万用户的实际数据进行验证和优化。此外，我们定期邀请金融和心理学专家对测评题目和算法进行审核，确保结果的科学性和准确性。
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-4 text-left font-medium flex justify-between items-center">
+                        <span>完成测评后多久能获得报告？</span>
+                        <i class="fa-solid fa-plus text-primary transition-transform"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-4 hidden">
+                        <p class="text-dark/70">
+                            在线测评完成后，系统会立即生成基础报告。如果选择包含专家解读的方案，我们的投资顾问将在24小时内与你联系，安排解读时间。
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-4 text-left font-medium flex justify-between items-center">
+                        <span>报告内容是否会保密？</span>
+                        <i class="fa-solid fa-plus text-primary transition-transform"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-4 hidden">
+                        <p class="text-dark/70">
+                            我们严格遵守隐私保护政策，所有用户数据都经过加密处理，不会向任何第三方共享。你可以在账户设置中随时删除你的测评记录。
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-4 text-left font-medium flex justify-between items-center">
+                        <span>测评结果有有效期吗？</span>
+                        <i class="fa-solid fa-plus text-primary transition-transform"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-4 hidden">
+                        <p class="text-dark/70">
+                            投资心理特征相对稳定，但会随着投资经验和市场环境的变化而调整。建议每1-2年重新进行测评，以确保投资策略与你的心理状态保持匹配。
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-4 text-left font-medium flex justify-between items-center">
+                        <span>如何使用测评结果指导投资？</span>
+                        <i class="fa-solid fa-plus text-primary transition-transform"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-4 hidden">
+                        <p class="text-dark/70">
+                            报告中会提供针对你个人投资心理特征的具体建议，包括适合的资产配置、投资产品选择、交易策略等。我们建议你将测评结果作为投资决策的重要参考，但最终决策应结合自身财务状况和市场环境综合考虑。
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-4 text-left font-medium flex justify-between items-center">
+                        <span>是否提供退款服务？</span>
+                        <i class="fa-solid fa-plus text-primary transition-transform"></i>
+                    </button>
+                    <div class="faq-content px-6 pb-4 hidden">
+                        <p class="text-dark/70">
+                            购买后7天内，如果你对测评报告不满意，可以申请全额退款。退款流程请联系客服处理。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 行动召唤 -->
+    <section class="py-20 bg-gradient-to-br from-primary to-primary/80 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-[clamp(1.75rem,4vw,2.5rem)] font-bold mb-6">
+                开启你的财富认知升级之旅
+            </h2>
+            <p class="text-white/80 text-lg max-w-2xl mx-auto mb-10">
+                了解自己的投资心理，克服认知偏差，让财富增长更科学、更稳健。现在就开始测评，掌握财富主动权！
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                <button id="ctaStartBtn" class="px-8 py-4 rounded-xl bg-white text-primary text-lg font-medium shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all flex items-center justify-center">
+                    <i class="fa-solid fa-play-circle mr-2"></i> 立即开始免费测评
+                </button>
+                <button class="px-8 py-4 rounded-xl border-2 border-white text-white text-lg font-medium hover:bg-white/10 transition-all flex items-center justify-center">
+                    <i class="fa-solid fa-headphones mr-2"></i> 预约顾问咨询
+                </button>
+            </div>
+            <div class="mt-12 flex flex-wrap justify-center gap-8">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-lock text-xl mr-2"></i>
+                    <span>银行级数据安全保障</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fa-solid fa-shield-check text-xl mr-2"></i>
+                    <span>7天无理由退款</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fa-solid fa-certificate text-xl mr-2"></i>
+                    <span>金融专家团队支持</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white/70 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+                            <i class="fa-solid fa-line-chart text-white text-xl"></i>
+                        </div>
+                        <h2 class="text-xl font-bold text-white">财富思维测评</h2>
+                    </div>
+                    <p class="mb-6">
+                        基于行为金融学理论，科学解析你的投资心理特征，提供个性化的财富管理建议。
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="fa-brands fa-weixin text-white"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="fa-brands fa-weibo text-white"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors">
+                            <i class="fa-brands fa-linkedin text-white"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-6">快速链接</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#about" class="hover:text-primary transition-colors">关于测评</a></li>
+                        <li><a href="#features" class="hover:text-primary transition-colors">核心功能</a></li>
+                        <li><a href="#sample" class="hover:text-primary transition-colors">报告示例</a></li>
+                        <li><a href="#pricing" class="hover:text-primary transition-colors">价格方案</a></li>
+                        <li><a href="#faq" class="hover:text-primary transition-colors">常见问题</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-6">解决方案</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-primary transition-colors">个人投资者</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">家庭财富管理</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">金融机构</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">企业员工福利</a></li>
+                        <li><a href="#" class="hover:text-primary transition-colors">教育机构</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-6">联系我们</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-map-marker-alt mt-1 mr-3"></i>
+                            <span>北京市朝阳区金融中心A座15层</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-phone mt-1 mr-3"></i>
+                            <span>400-888-9999</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fa-solid fa-envelope mt-1 mr-3"></i>
+                            <span>contact@wealthpsych.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p>© 2025 富贵人生俱乐部. 保留所有权利.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-primary transition-colors">隐私政策</a>
+                    <a href="#" class="hover:text-primary transition-colors">服务条款</a>
+                    <a href="#" class="hover:text-primary transition-colors">免责声明</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 测评模态框 -->
+    <div id="assessmentModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center hidden">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl max-h-[90vh] overflow-auto">
+            <div class="p-6 border-b border-gray-100 flex justify-between items-center sticky top-0 bg-white">
+                <h3 class="text-xl font-bold text-dark">财富思维测评</h3>
+                <button id="closeModalBtn" class="text-dark/50 hover:text-dark">
+                    <i class="fa-solid fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <div class="p-6">
+                <div id="progressBar" class="w-full bg-gray-200 rounded-full h-2 mb-8">
+                    <div id="progressFill" class="bg-primary h-2 rounded-full progress-bar" style="width: 0%"></div>
+                </div>
+                
+                <div id="questionContainer">
+                    <h4 id="questionNumber" class="text-primary font-medium mb-2">问题 1/10</h4>
+                    <h2 id="questionText" class="text-2xl font-bold text-dark mb-6">假设你意外获得了1000元奖金，你会如何分配？</h2>
+                    
+                    <div id="answers" class="space-y-4 mb-8">
+                        <button class="answer-btn w-full p-4 rounded-xl border border-gray-200 text-left hover:border-primary hover:bg-primary/5 transition-all">
+                            <span class="font-medium">A.</span> 全部存入储蓄账户
+                        </button>
+                        <button class="answer-btn w-full p-4 rounded-xl border border-gray-200 text-left hover:border-primary hover:bg-primary/5 transition-all">
+                            <span class="font-medium">B.</span> 50%存入储蓄，50%用于投资（如基金、股票）
+                        </button>
+                        <button class="answer-btn w-full p-4 rounded-xl border border-gray-200 text-left hover:border-primary hover:bg-primary/5 transition-all">
+                            <span class="font-medium">C.</span> 70%用于投资，30%保留现金
+                        </button>
+                        <button class="answer-btn w-full p-4 rounded-xl border border-gray-200 text-left hover:border-primary hover:bg-primary/5 transition-all">
+                            <span class="font-medium">D.</span> 全部用于投资高风险资产（如股票、加密货币）
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="resultsContainer" class="hidden">
+                    <div class="text-center mb-8">
+                        <div class="w-24 h-24 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                            <i class="fa-solid fa-check text-primary text-3xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-dark mb-2">测评已完成！</h3>
+                        <p class="text-dark/70">你的财富心理分析报告已生成</p>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-xl p-6 mb-8">
+                        <div class="flex items-center justify-between mb-4">
+                            <h4 class="font-bold">初步分析结果</h4>
+                            <span class="text-sm text-primary">查看完整报告</span>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-white rounded-lg p-4">
+                                <h5 class="text-sm text-dark/70 mb-1">投资心理类型</h5>
+                                <h4 class="font-bold">稳健型投资者</h4>
+                            </div>
+                            <div class="bg-white rounded-lg p-4">
+                                <h5 class="text-sm text-dark/70 mb-1">风险承受能力</h5>
+                                <h4 class="font-bold">中等级别</h4>
+                            </div>
+                            <div class="bg-white rounded-lg p-4">
+                                <h5 class="text-sm text-dark/70 mb-1">主要认知偏差</h5>
+                                <h4 class="font-bold">损失厌恶</h4>
+                            </div>
+                            <div class="bg-white rounded-lg p-4">
+                                <h5 class="text-sm text-dark/70 mb-1">建议配置</h5>
+                                <h4 class="font-bold">60%股票 + 30%债券 + 10%现金</h4>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center">
+                        <button id="purchaseBtn" class="px-8 py-3 rounded-xl bg-primary text-white font-medium shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all">
+                            联系推荐人获取更完整的报告
+                        </button>
+                        <p class="text-dark/60 text-sm mt-4">
+                            支持微信、支付宝、银行卡等多种支付方式
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('py-2', 'shadow-md');
+                navbar.classList.remove('py-3');
+            } else {
+                navbar.classList.add('py-3');
+                navbar.classList.remove('py-2', 'shadow-md');
+            }
+        });
+        
+        // 移动端菜单切换
+        document.getElementById('menuBtn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // FAQ 切换
+        document.querySelectorAll('.faq-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('i');
+                
+                content.classList.toggle('hidden');
+                icon.classList.toggle('fa-plus');
+                icon.classList.toggle('fa-minus');
+                icon.classList.toggle('rotate-45');
+            });
+        });
+        
+        // 测评模态框
+        const assessmentModal = document.getElementById('assessmentModal');
+        const startBtns = [
+            document.getElementById('startBtn'),
+            document.getElementById('heroStartBtn'),
+            document.getElementById('ctaStartBtn')
+        ];
+        
+        startBtns.forEach(btn => {
+            if (btn) {
+                btn.addEventListener('click', function() {
+                    assessmentModal.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+        });
+        
+        document.getElementById('closeModalBtn').addEventListener('click', function() {
+            assessmentModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+        
+        // 测评问题逻辑
+        const questions = [
+            {
+                number: 1,
+                text: "假设你意外获得了1000元奖金，你会如何分配？",
+                answers: [
+                    "A. 全部存入储蓄账户",
+                    "B. 50%存入储蓄，50%用于投资（如基金、股票）",
+                    "C. 70%用于投资，30%保留现金",
+                    "D. 全部用于投资高风险资产（如股票、加密货币）"
+                ],
+                scores: [1, 2, 3, 4]
+            },
+            {
+                number: 2,
+                text: "当你购买的股票价格下跌20%时，你会：",
+                answers: [
+                    "A. 立即卖出，避免进一步损失",
+                    "B. 持有观望，等待价格回升",
+                    "C. 追加买入，认为这是低价买入的机会",
+                    "D. 忽视它，相信长期会反弹"
+                ],
+                scores: [1, 2, 4, 3]
+            },
+            {
+                number: 3,
+                text: "你更倾向于：",
+                answers: [
+                    "A. 稳定的低回报投资（如国债、定期存款）",
+                    "B. 中等风险和回报的投资（如指数基金、债券）",
+                    "C. 高风险高回报的投资（如股票、创业项目）",
+                    "D. 根据市场情况灵活调整投资组合"
+                ],
+                scores: [1, 2, 4, 3]
+            },
+            {
+                number: 4,
+                text: "你愿意为一项预期回报率为15%的投资承担多大的风险？",
+                answers: [
+                    "A. 最多接受5%的本金损失",
+                    "B. 可以接受10%的本金损失",
+                    "C. 能够承受20%的本金损失",
+                    "D. 愿意接受30%以上的本金损失"
+                ],
+                scores: [1, 2, 3, 4]
+            },
+            {
+                number: 5,
+                text: "当你看到朋友或同事在某投资中获利时，你会：",
+                answers: [
+                    "A. 忽略他们，坚持自己的投资策略",
+                    "B. 谨慎研究后决定是否跟随",
+                    "C. 立即跟进，担心错过机会",
+                    "D. 怀疑这是泡沫，避免参与"
+                ],
+                scores: [4, 3, 1, 2]
+            },
+            {
+                number: 6,
+                text: "你对投资的时间规划是：",
+                answers: [
+                    "A. 1年内短期获利",
+                    "B. 3-5年中期增长",
+                    "C. 5-10年长期投资",
+                    "D. 10年以上超长期投资（如养老）"
+                ],
+                scores: [1, 2, 3, 4]
+            },
+            {
+                number: 7,
+                text: "如果你的投资组合在一年内亏损了15%，你会：",
+                answers: [
+                    "A. 彻底退出投资市场",
+                    "B. 减少投资金额，转向保守型产品",
+                    "C. 保持现有投资，等待市场恢复",
+                    "D. 增加投资，利用低价买入更多"
+                ],
+                scores: [1, 2, 3, 4]
+            },
+            {
+                number: 8,
+                text: "你更关注投资的：",
+                answers: [
+                    "A. 安全性和稳定性",
+                    "B. 适度回报和风险控制",
+                    "C. 高收益潜力",
+                    "D. 税收效率和资产配置"
+                ],
+                scores: [1, 2, 4, 3]
+            },
+            {
+                number: 9,
+                text: "对于新出现的投资机会（如区块链、人工智能），你的态度是：",
+                answers: [
+                    "A. 完全不感兴趣，只选择传统投资",
+                    "B. 谨慎观望，等待成熟后再参与",
+                    "C. 积极研究，愿意尝试少量资金",
+                    "D. 主动寻找并大量投入新兴领域"
+                ],
+                scores: [1, 2, 3, 4]
+            },
+            {
+                number: 10,
+                text: "你认为自己的投资知识水平如何？",
+                answers: [
+                    "A. 初学者，需要专业指导",
+                    "B. 有基本了解，能独立做出简单决策",
+                    "C. 比较了解，能理解复杂的投资产品",
+                    "D. 专家水平，能分析市场趋势并制定策略"
+                ],
+                scores: [1, 2, 3, 4]
+            }
+        ];
+        
+        let currentQuestion = 0;
+        const answers = [];
+        
+        function loadQuestion(index) {
+            if (index < questions.length) {
+                const question = questions[index];
+                document.getElementById('questionNumber').textContent = `问题 ${question.number}/10`;
+                document.getElementById('questionText').textContent = question.text;
+                
+                const answerBtns = document.querySelectorAll('.answer-btn');
+                answerBtns.forEach((btn, i) => {
+                    btn.innerHTML = `<span class="font-medium">${question.answers[i].charAt(0)}.</span> ${question.answers[i].substring(2)}`;
+                    btn.onclick = function() {
+                        answers[index] = question.scores[i];
+                        answerBtns.forEach(b => b.classList.remove('border-primary', 'bg-primary/5'));
+                        this.classList.add('border-primary', 'bg-primary/5');
+                        
+                        // 自动前进到下一题
+                        setTimeout(() => {
+                            currentQuestion++;
+                            updateProgressBar();
+                            if (currentQuestion < questions.length) {
+                                loadQuestion(currentQuestion);
+                            } else {
+                                showResults();
+                            }
+                        }, 300);
+                    };
+                });
+            }
+        }
+        
+        function updateProgressBar() {
+            const progress = (currentQuestion / questions.length) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+        }
+        
+        function showResults() {
+            document.getElementById('questionContainer').classList.add('hidden');
+            document.getElementById('resultsContainer').classList.remove('hidden');
+        }
+        
+        // 初始化测评
+        loadQuestion(currentQuestion);
+        
+        // 支付按钮
+        document.getElementById('purchaseBtn').addEventListener('click', function() {
+            alert('请联系推荐人...');
+        });
+        
+        // 图表初始化
+        window.addEventListener('load', function() {
+            // 绩效对比图
+            const perfCtx = document.getElementById('performanceChart').getContext('2d');
+            new Chart(perfCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2020', '2021', '2022', '2023', '2024'],
+                    datasets: [
+                        {
+                            label: '遵循测评建议',
+                            data: [5, 12, 8, 15, 18],
+                            borderColor: '#165DFF',
+                            backgroundColor: 'rgba(22, 93, 255, 0.1)',
+                            tension: 0.3,
+                            fill: true
+                        },
+                        {
+                            label: '市场平均',
+                            data: [3, 8, 5, 10, 12],
+                            borderColor: '#94A3B8',
+                            backgroundColor: 'rgba(148, 163, 184, 0.1)',
+                            tension: 0.3,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: '年化收益率对比 (%)'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            
+            // 风险雷达图
+            const riskCtx = document.getElementById('riskRadarChart').getContext('2d');
+            new Chart(riskCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['损失容忍度', '不确定性承受力', '收益追求度', '投资知识', '长期视野'],
+                    datasets: [{
+                        label: '用户得分',
+                        data: [3, 4, 2, 3, 4],
+                        fill: true,
+                        backgroundColor: 'rgba(22, 93, 255, 0.2)',
+                        borderColor: '#165DFF',
+                        pointBackgroundColor: '#165DFF',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#165DFF'
+                    }]
+                },
+                options: {
+                    elements: {
+                        line: {
+                            borderWidth: 3
+                        }
+                    },
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 5
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>    
